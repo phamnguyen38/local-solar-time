@@ -50,3 +50,10 @@ That is fine for sundials and architecture; it is not fine for navigation.
   `.longitudinal_offset`.
 - `SolarCalculator` — static helpers: `.equation_of_time(dt)`,
   `.solar_declination(dt)`, `.day_of_year(dt)`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
